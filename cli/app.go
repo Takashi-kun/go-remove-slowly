@@ -35,11 +35,10 @@ func getFilePaths(paths []string) ([]string, error) {
 	checked := map[string]bool{}
 
 	walkFunc := func(path string, info os.FileInfo, err error) error {
-		isDir, err := isDirectory(path)
 		if err != nil {
 			return err
 		}
-		if isDir {
+		if info.IsDir() {
 			return nil
 		}
 		if _, ok := checked[path]; ok {
